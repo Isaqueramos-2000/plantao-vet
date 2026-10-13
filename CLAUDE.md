@@ -43,6 +43,7 @@ docs/plano-produto.md
 - **Datas:** fuso fixo UTC-3 (Brasília). Formatação manual em `lib/format.ts` (sem `Intl`) para servidor e navegador gerarem o mesmo texto e evitar erro de hidratação.
 - **"Agora" da demo:** `DEMO_NOW` = data do build às 09:40 (`NEXT_PUBLIC_DEMO_NOW` injetada em `next.config.ts`). Datas dos mocks são relativas: `at(diasDeHoje, hora, minuto)`.
 - **Client components** recebem DTOs já formatados (strings/números), não objetos de domínio.
+- **Acesso por senha:** `src/proxy.ts` (Next 16) bloqueia todas as rotas sem o cookie `pv_access` (HMAC da senha, `lib/access.ts`). Login em `/acesso` → `POST /api/acesso`. Senha só em `DEMO_PASSWORD` (Vercel / `.env.local`), nunca no código. Sem a variável: produção bloqueada, dev liberado.
 - **Ações não funcionais** usam `DemoButton`/`useToast` para avisar que nada é salvo.
 - Interface em PT-BR; código, tipos e variáveis em inglês. TypeScript estrito com `noUncheckedIndexedAccess`.
 

@@ -14,14 +14,23 @@ pnpm install
 pnpm dev          # http://localhost:3000
 pnpm test         # regras de negócio (Vitest)
 pnpm typecheck
-pnpm build        # build de produção (todas as páginas são estáticas)
+pnpm build        # build de produção (páginas estáticas + proxy de senha)
 ```
 
 ## Publicar na Vercel
 
 1. Em [vercel.com/new](https://vercel.com/new), importe este repositório do GitHub.
-2. A Vercel detecta Next.js e pnpm sozinha. Não altere nada e clique em **Deploy**.
-3. Nenhuma variável de ambiente é obrigatória.
+2. Em **Environment Variables**, adicione `DEMO_PASSWORD` com a senha de acesso.
+3. Clique em **Deploy**. A Vercel detecta Next.js e pnpm sozinha.
+
+## Acesso por senha
+
+Todas as páginas exigem a senha definida em `DEMO_PASSWORD` (tela `/acesso`; o acesso vale por 30 dias no navegador).
+
+- A senha **não fica no código**: só na variável de ambiente da Vercel.
+- Para trocar: Vercel → projeto → Settings → Environment Variables → editar `DEMO_PASSWORD` → Deployments → **Redeploy**. Quem entrou com a senha antiga perde o acesso.
+- Sem a variável, o site em produção fica bloqueado. Em `pnpm dev`, sem a variável, o acesso é livre.
+- Para testar localmente com senha: crie `.env.local` com `DEMO_PASSWORD=...` (arquivo ignorado pelo git).
 
 A data "de hoje" dos dados fictícios é fixada no momento do build. Cada novo deploy atualiza a demo.
 Para congelar uma data, defina `NEXT_PUBLIC_DEMO_NOW` (ISO 8601) nas variáveis de ambiente da Vercel.

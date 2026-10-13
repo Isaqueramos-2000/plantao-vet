@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const links = [
   { href: "/", label: "Início" },
@@ -8,6 +11,8 @@ const links = [
 ];
 
 export function DemoBanner() {
+  const pathname = usePathname();
+  if (pathname === "/acesso") return null;
   return (
     <div className="bg-slate-900 text-xs text-slate-300">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-4 gap-y-1 px-4 py-1.5 lg:h-7 lg:flex-nowrap lg:py-0">
